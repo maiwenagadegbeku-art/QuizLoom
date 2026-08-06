@@ -33,7 +33,7 @@ body { font-family: 'Inter', system-ui, sans-serif; font-size: 14px; background:
   border-radius: var(--radius); padding: 18px 20px;
 }
 .workflow-title { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 14px; }
-.workflow-steps { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: start; gap: 0; }
+.workflow-steps { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: start; gap: 0; }
 .wf-arrow { color: var(--border); font-size: 18px; padding: 0 6px; margin-top: 10px; flex-shrink: 0; }
 .wf-step { text-align: center; padding: 0 4px; }
 .wf-num {
@@ -118,6 +118,26 @@ select { cursor: pointer; }
 /* ── Format tip ── */
 .format-tip { margin-top: 0; margin-bottom: 16px; padding: 12px 14px; border-radius: 9px; background: var(--panel); border-left: 3px solid var(--accent2); font-size: 12px; color: var(--text-muted); line-height: 1.6; }
 .format-tip pre { margin-top: 8px; background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 8px 10px; font-size: 11.5px; white-space: pre-wrap; font-family: 'Courier New', monospace; color: var(--text); }
+
+/* ── Formats & angle (étape 1) ── */
+.grid2cfg { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0 0; }
+.format-checks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.fmt-check { display: flex; align-items: center; gap: 7px; padding: 8px 13px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); font-size: 13px; color: var(--text); cursor: pointer; user-select: none; transition: all 0.15s; }
+.fmt-check:has(input:checked) { border-color: var(--accent2); background: var(--panel); font-weight: 600; }
+.fmt-check input { width: auto; margin: 0; cursor: pointer; }
+.fmt-hint { margin-top: 8px; font-size: 11.5px; color: var(--text-muted); line-height: 1.5; min-height: 0; }
+.opt-tag { font-size: 10px; font-weight: 500; color: var(--text-muted); background: var(--panel); padding: 1px 7px; border-radius: 99px; margin-left: 4px; }
+
+/* ── Repli inline (étape 2) ── */
+.repli-banner { background: rgba(217,119,6,0.08); border: 1px solid rgba(217,119,6,0.35); border-radius: 9px; padding: 12px 14px; margin-bottom: 12px; font-size: 12.5px; color: var(--text); }
+.repli-banner .repli-head { font-weight: 600; color: #b45309; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.repli-item { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-top: 1px solid rgba(217,119,6,0.18); flex-wrap: wrap; }
+.repli-item:first-of-type { border-top: none; }
+.repli-item .repli-q { flex: 1; min-width: 140px; font-size: 12px; color: var(--text-muted); }
+.repli-item .repli-q strong { color: var(--text); font-weight: 600; }
+.repli-item select { width: auto; min-width: 110px; padding: 5px 8px; font-size: 12px; }
+.repli-item.err .repli-q strong { color: var(--wrong, #dc2626); }
+.repli-fixed { color: #16a34a; font-size: 11px; font-weight: 600; }
 .mini-btn { margin-top: 8px; display: inline-block; padding: 5px 10px; border-radius: 7px; border: 1px solid var(--border); background: var(--bg); color: var(--text-muted); font-size: 11.5px; cursor: pointer; font-family: inherit; }
 .mini-btn:hover { background: var(--card); color: var(--text); }
 
@@ -134,6 +154,21 @@ select { cursor: pointer; }
 
 /* ── Divider ── */
 .divider { max-width: 680px; margin: 8px auto 16px; border: none; border-top: 1px solid var(--border); }
+
+/* ── Settings panel ── */
+.settings-toggle { max-width: 680px; margin: 0 auto 16px; text-align: right; }
+.settings-toggle button { padding: 6px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--text-muted); font-size: 12px; cursor: pointer; font-family: inherit; }
+.settings-toggle button:hover { background: var(--panel); color: var(--text); }
+.settings-panel { max-width: 680px; margin: 0 auto 16px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; display: none; }
+.settings-panel.open { display: block; }
+.settings-panel .field { margin-bottom: 12px; }
+.settings-panel .field:last-child { margin-bottom: 0; }
+.settings-hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+/* ── URL display ── */
+.url-display { margin-top: 12px; padding: 10px 13px; border-radius: 9px; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+.url-display code { flex: 1; font-size: 12px; color: var(--text); word-break: break-all; font-family: 'Courier New', monospace; }
+.url-display button { flex-shrink: 0; }
 
 /* ── Footer ── */
 .footer { text-align: center; font-size: 11px; color: var(--text-muted); max-width: 680px; margin: 20px auto 0; opacity: 0.6; }
@@ -211,7 +246,7 @@ select { cursor: pointer; }
   <div class="logo">⚡</div>
   <div>
     <div class="app-name">Quiz<span>Loom</span></div>
-    <div class="app-sub">De ta séance Lesson Loom à un QCM Pronote en 3 étapes</div>
+    <div class="app-sub">De ta séance Lesson Loom à un QCM Pronote ou quiz web interactif</div>
   </div>
   <button id="tourBtn" onclick="startTour()" style="margin-left:auto;padding:8px 16px;border-radius:9px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap" onmouseover="this.style.background='var(--panel)'" onmouseout="this.style.background='var(--card)'">✦ Guide &amp; Démo</button>
 </header>
@@ -238,6 +273,13 @@ select { cursor: pointer; }
       <div class="wf-num">3</div>
       <div class="wf-label">Retour ici</div>
       <div class="wf-desc">Colle la réponse, génère le fichier XML, importe dans Pronote</div>
+      <span class="wf-tag">⬇ ci-dessous</span>
+    </div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-step">
+      <div class="wf-num">+</div>
+      <div class="wf-label">Export web</div>
+      <div class="wf-desc">Exporte aussi en quiz interactif HTML, intégrable sur un site</div>
       <span class="wf-tag">⬇ ci-dessous</span>
     </div>
   </div>
@@ -271,7 +313,7 @@ select { cursor: pointer; }
     <div class="preview" id="preview1"></div>
   </div>
 
-  <div class="grid3">
+  <div class="grid2cfg">
     <div class="field">
       <label>Questions</label>
       <select id="nbQ">
@@ -287,26 +329,34 @@ select { cursor: pointer; }
         <option selected>B1</option><option>B1+</option><option>B2</option><option>B2+</option><option>C1</option><option>C1+</option>
       </select>
     </div>
-    <div class="field">
-      <label>Type</label>
-      <select id="typeQ">
-        <option value="mixte">✦ Mixte</option>
-        <optgroup label="Compréhension">
-          <option value="comprehension_litterale">Compréhension littérale</option>
-          <option value="inference">Inférence</option>
-        </optgroup>
-        <optgroup label="Langue">
-          <option value="vocabulaire">Vocabulaire</option>
-          <option value="lexique_contexte">Lexique en contexte</option>
-          <option value="grammaire">Grammaire</option>
-          <option value="connecteurs">Connecteurs logiques</option>
-        </optgroup>
-        <optgroup label="Autre">
-          <option value="civilisation">Civilisation / culture</option>
-          <option value="vrai_faux">Vrai / Faux justifié</option>
-        </optgroup>
-      </select>
+  </div>
+
+  <div class="field" style="margin-top:14px">
+    <label>Formats de question</label>
+    <div class="format-checks">
+      <label class="fmt-check"><input type="checkbox" id="fmt-qcm" checked onchange="updateFormatHint()"> QCM</label>
+      <label class="fmt-check"><input type="checkbox" id="fmt-vf" onchange="updateFormatHint()"> Vrai / Faux</label>
     </div>
+    <div class="fmt-hint" id="fmtHint"></div>
+  </div>
+
+  <div class="field" style="margin-top:12px">
+    <label>Angle de contenu <span class="opt-tag">optionnel</span></label>
+    <select id="contentAngle">
+      <option value="tout">Tout — mélange équilibré</option>
+      <optgroup label="Compréhension">
+        <option value="comprehension_litterale">Compréhension littérale</option>
+        <option value="inference">Inférence</option>
+      </optgroup>
+      <optgroup label="Langue">
+        <option value="vocabulaire">Vocabulaire</option>
+        <option value="grammaire">Grammaire</option>
+        <option value="connecteurs">Connecteurs logiques</option>
+      </optgroup>
+      <optgroup label="Autre">
+        <option value="civilisation">Civilisation / culture</option>
+      </optgroup>
+    </select>
   </div>
 
   <button class="btn-gen" id="genBtn1" onclick="buildPrompt()">
@@ -333,18 +383,18 @@ select { cursor: pointer; }
   </div>
 
   <div class="format-tip">
-    💡 <strong>Format attendu</strong> — Claude va générer le QCM dans ce format (il est déjà inclus dans le prompt). Une question par bloc séparé par une ligne vide, la bonne réponse précédée de <code>V=</code>.
-    <pre>What is the capital of the UK?
+    💡 <strong>Format attendu</strong> — Claude génère chaque question dans un bloc tagué (le format est déjà inclus dans le prompt) : un tag <code>[QCM]</code> ou <code>[VF]</code>, la bonne réponse en <code>V=</code>, une consigne <code>C=</code> et une explication <code>E=</code> optionnelles.
+    <pre>[QCM]
+C=Choose the correct answer.
+What is the capital of the UK?
 V=London
 Paris
 Dublin
-Edinburgh
 
-Who wrote "Romeo and Juliet"?
-Charles Dickens
-V=William Shakespeare
-Jane Austen
-Oscar Wilde</pre>
+[VF]
+The wolf is described as friendly.
+V=False
+E=The text says the wolf attacks the grandmother.</pre>
     <button class="mini-btn" id="copyFmtBtn" onclick="copyFormat()">📋 Copier ces consignes seules</button>
   </div>
 
@@ -388,13 +438,57 @@ Oscar Wilde</pre>
       <button class="btn-dl" onclick="downloadXML()">⬇️ Télécharger le .xml</button>
     </div>
     <div class="tip">Dans Pronote : <em>Outils pédagogiques → QCM → Importer des QCM → depuis des fichiers XML</em>. Relis toujours le QCM avant de le diffuser — vérifie les bonnes réponses.</div>
-    <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
-      <button onclick="resetAll()" style="width:100%;padding:10px;border-radius:9px;border:none;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:.01em">✦ Nouveau QCM</button>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div class="settings-toggle">
+  <button onclick="toggleSettings()">⚙ Settings</button>
+</div>
+<div class="settings-panel" id="settingsPanel">
+  <div class="field">
+    <label>Base URL for web export</label>
+    <input type="text" id="baseUrl" placeholder="https://votre-site.fr/quiz/" oninput="saveBaseUrl()">
+    <div class="settings-hint">Set once. Quiz file URLs will be built from this base + filename.</div>
+  </div>
+</div>
+
+<!-- ÉTAPE 3: EXPORT WEB -->
+<hr class="divider">
+<div class="card">
+  <div class="step-header">
+    <div class="step-badge">3</div>
+    <div class="step-title">Export quiz web interactif</div>
+    <div class="step-sub">→ pour site / iframe</div>
+  </div>
+
+  <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:16px">
+    Exporte le quiz ci-dessus en fichier HTML autonome : quiz interactif jouable dans le navigateur, 
+    int&eacute;grable en iframe sur n'importe quel site.
+  </p>
+
+  <div class="field" style="margin-bottom:12px">
+    <label>Quiz title (shown to students)</label>
+    <input type="text" id="webQuizTitle" placeholder="e.g. Nosedive — Vocabulary review">
+  </div>
+
+  <button class="btn-gen" id="genBtnWeb" onclick="exportWebQuiz()" disabled style="background:linear-gradient(135deg,#1a9ab4,#0e7490)">
+    🌐 Export web quiz
+  </button>
+
+  <div class="result-box" id="resultWeb">
+    <div class="stats" id="statsWeb"></div>
+    <div class="url-display" id="urlDisplay" style="display:none">
+      <code id="webQuizUrl"></code>
+      <button class="btn-copy" id="copyUrlBtn" onclick="copyWebUrl()" style="flex:none;padding:6px 14px">📋 Copy URL</button>
+    </div>
+    <div class="actions" style="margin-top:12px">
+      <button class="btn-dl" id="dlWebBtn" onclick="downloadWebQuiz()" style="display:none;background:#1a9ab4">⬇️ Download HTML</button>
     </div>
   </div>
 </div>
 
-<div class="footer">QuizLoom · pour Lesson Loom · usage personnel</div>
+<div class="footer">QuizLoom · pour Lesson Loom</div>
 
 <script>
 // ── State ──
@@ -402,31 +496,63 @@ let extractedText1 = '';
 let mode1 = 'text';
 let lastXML = '';
 let liveDebounce2 = null;
+let step2Forced = {};
 
-const TYPE_LABELS = {
-  mixte: 'mélange équilibré (compréhension, vocabulaire, grammaire)',
-  comprehension_litterale: 'compréhension littérale — questions sur ce qui est explicitement dit dans le document',
-  inference: 'inférence — questions sur ce qui est implicite ou sous-entendu dans le document',
-  vocabulaire: 'vocabulaire — définitions, synonymes, antonymes issus de la séance',
-  lexique_contexte: "lexique en contexte — deviner le sens d'un mot ou d'une expression d'après le contexte",
+// Angles de contenu (secondaire, facultatif)
+const CONTENT_LABELS = {
+  tout: '',
+  comprehension_litterale: 'compréhension littérale — ce qui est explicitement dit dans le document',
+  inference: 'inférence — ce qui est implicite ou sous-entendu dans le document',
+  vocabulaire: 'vocabulaire — définitions, synonymes, antonymes, ou sens deviné en contexte',
   grammaire: 'grammaire — structures et formes grammaticales travaillées dans la séance',
-  connecteurs: 'connecteurs logiques — choisir le bon connecteur (however, although, therefore…) dans des phrases',
-  civilisation: 'civilisation et culture — contexte culturel, historique ou sociétal du document',
-  vrai_faux: 'vrai / faux justifié — affirmations à valider ou invalider avec justification tirée du document'
+  connecteurs: 'connecteurs logiques — choisir le bon connecteur (however, although, therefore…)',
+  civilisation: 'civilisation et culture — contexte culturel, historique ou sociétal du document'
 };
 
-const FORMAT_INSTRUCTIONS = `Présente chaque question de QCM sous cette forme exacte :
-- Une question par bloc, les blocs séparés par une ligne vide
-- La bonne réponse doit commencer par "V=" (exemple : V=London)
-- 3 ou 4 propositions par question
-- Pas de numérotation ni mise en forme supplémentaire
+// Formats disponibles (phase 1 : qcm, vf). Chaque format porte son bloc d'instructions + exemple.
+const FORMAT_DEFS = {
+  qcm: {
+    tag: 'QCM',
+    label: 'QCM',
+    instr: `[QCM] — une ou plusieurs bonnes réponses
+- La question tient sur UNE seule ligne (mets toute consigne dans C=).
+- La ou les bonnes réponses commencent par V=. Les autres propositions sans préfixe.
+- 3 ou 4 propositions. Une seule V= = réponse unique ; plusieurs V= = réponses multiples.
 
 Exemple :
+[QCM]
+C=Choose the correct answer.
 What is the capital of the UK?
 V=London
 Paris
 Dublin
-Edinburgh`;
+E=The document states that London is the capital of the United Kingdom.`
+  },
+  vf: {
+    tag: 'VF',
+    label: 'Vrai / Faux',
+    instr: `[VF] — vrai ou faux
+- L'affirmation, puis UNE seule ligne V=True ou V=False. Aucune autre proposition.
+- Mets la justification dans E=, jamais dans l'affirmation (sinon la réponse est dévoilée).
+
+Exemple :
+[VF]
+C=True or false?
+The wolf is described as friendly.
+V=False
+E=The text says the wolf attacks the grandmother.`
+  }
+};
+
+// En-tête de format commun à tous les blocs
+const FORMAT_HEADER = `FORMAT DE SORTIE — à respecter exactement :
+- Une question par bloc, les blocs séparés par une ligne vide.
+- Chaque bloc COMMENCE par un tag sur sa propre ligne : ${Object.values(FORMAT_DEFS).map(f => '[' + f.tag + ']').join(' ou ')}.
+- Chaque bloc DOIT inclure ces deux lignes, juste après le tag :
+  - C= consigne courte et générique adressée à l'élève (ex : C=Choose the correct answer. / C=True or false?).
+  - E= explication de la bonne réponse en une phrase, en t'appuyant sur le document.
+- Ne les omets jamais : les deux lignes sont attendues sur TOUS les blocs, quel que soit le format.
+- Pas de numérotation, pas de gras, pas de puces.`;
 
 // ── Step 1: Input ──
 function switchTab1(mode) {
@@ -473,6 +599,32 @@ function handleFile1(input) {
   reader.readAsText(file, 'utf-8');
 }
 
+// Formats cochés → tableau de clés ('qcm', 'vf')
+function getCheckedFormats() {
+  const f = [];
+  if (document.getElementById('fmt-qcm').checked) f.push('qcm');
+  if (document.getElementById('fmt-vf').checked) f.push('vf');
+  return f;
+}
+
+// Indice d'affinité léger sous les cases (garde-fou non bloquant)
+function updateFormatHint() {
+  const f = getCheckedFormats();
+  const angle = document.getElementById('contentAngle').value;
+  const hint = document.getElementById('fmtHint');
+  if (f.length === 0) { hint.textContent = '⚠ Coche au moins un format.'; hint.style.color = '#b45309'; return; }
+  hint.style.color = '';
+  // Vrai/Faux se prête mal à la langue pure (vocabulaire, grammaire, connecteurs)
+  const langAngles = ['vocabulaire', 'grammaire', 'connecteurs'];
+  if (f.includes('vf') && langAngles.includes(angle)) {
+    hint.textContent = '💡 Le Vrai/Faux fonctionne mieux sur la compréhension ou la civilisation que sur la langue pure. Le QCM reste plus adapté ici.';
+  } else if (f.length === 1 && f[0] === 'vf') {
+    hint.textContent = '💡 Quiz 100 % Vrai/Faux. Pense à ajouter du QCM pour varier.';
+  } else {
+    hint.textContent = '';
+  }
+}
+
 // ── Step 1: Build prompt ──
 function buildPrompt() {
   const rawText = mode1 === 'text' ? document.getElementById('pasteArea1').value.trim() : extractedText1;
@@ -480,19 +632,37 @@ function buildPrompt() {
     alert('Merci de coller du texte ou importer un fichier avant de générer le prompt.');
     return;
   }
+  const formats = getCheckedFormats();
+  if (formats.length === 0) { alert('Coche au moins un format de question.'); return; }
+
   const nbQ = document.getElementById('nbQ').value;
   const niveau = document.getElementById('niveau1').value;
-  const typeQ = document.getElementById('typeQ').value;
-  const typeLabel = TYPE_LABELS[typeQ] || typeQ;
+  const angle = document.getElementById('contentAngle').value;
+  const angleLabel = CONTENT_LABELS[angle] || '';
   const content = rawText.slice(0, 3000);
+
+  // Clause formats
+  let formatsClause;
+  if (formats.length === 1) {
+    formatsClause = `Utilise uniquement le format ${FORMAT_DEFS[formats[0]].label}.`;
+  } else {
+    formatsClause = `Mélange les formats suivants de façon variée : ${formats.map(k => FORMAT_DEFS[k].label).join(', ')}.`;
+  }
+  // Clause angle
+  const angleClause = angleLabel ? `\nCentre les questions sur : ${angleLabel}.` : '';
+  // Blocs d'instructions par format coché
+  const formatBlocks = formats.map(k => FORMAT_DEFS[k].instr).join('\n\n');
 
   const prompt =
 `Tu es un assistant pédagogique spécialisé en anglais LV1 pour le collège et lycée français.
 
-À partir du contenu de séance ci-dessous, génère exactement ${nbQ} questions de QCM de type : ${typeLabel}.
+À partir du contenu de séance ci-dessous, génère exactement ${nbQ} questions de quiz.
 Adapte les questions à un niveau ${niveau}.
+${formatsClause}${angleClause}
 
-${FORMAT_INSTRUCTIONS}
+${FORMAT_HEADER}
+
+${formatBlocks}
 
 ── CONTENU DE LA SÉANCE ──
 ${content}
@@ -503,7 +673,6 @@ ${content}
   resetCopyBtn('copyBtn1', '📋 Copier le prompt');
   document.getElementById('result1').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-  // Pré-remplir les métadonnées de l'étape 2
   if (!document.getElementById('niveauMeta').value) {
     document.getElementById('niveauMeta').value = niveau;
   }
@@ -516,7 +685,10 @@ function copyPrompt() {
 }
 
 function copyFormat() {
-  navigator.clipboard.writeText(FORMAT_INSTRUCTIONS).then(() => {
+  const formats = getCheckedFormats();
+  const keys = formats.length ? formats : ['qcm'];
+  const txt = FORMAT_HEADER + '\n\n' + keys.map(k => FORMAT_DEFS[k].instr).join('\n\n');
+  navigator.clipboard.writeText(txt).then(() => {
     flashCopy('copyFmtBtn', '✅ Copié !', '📋 Copier ces consignes seules');
   });
 }
@@ -524,6 +696,7 @@ function copyFormat() {
 // ── Step 2: Parse & convert ──
 function onText2Input() {
   document.getElementById('genBtn2').disabled = !document.getElementById('pasteArea2').value.trim();
+  step2Forced = {};
   clearTimeout(liveDebounce2);
   liveDebounce2 = setTimeout(updateLiveStats2, 300);
 }
@@ -532,15 +705,23 @@ function clearText2() {
   document.getElementById('pasteArea2').value = '';
   document.getElementById('liveStats2').innerHTML = '';
   document.getElementById('genBtn2').disabled = true;
+  step2Forced = {};
 }
 
 function updateLiveStats2() {
   const txt = document.getElementById('pasteArea2').value.trim();
   const el = document.getElementById('liveStats2');
   if (!txt) { el.innerHTML = ''; return; }
-  const { questions, warnings } = parseQCM(txt);
-  const nbA = questions.reduce((a, q) => a + q.answers.length, 0);
-  el.innerHTML = `<span class="live-pill ok">${questions.length} question${questions.length !== 1 ? 's' : ''} détectée${questions.length !== 1 ? 's' : ''}</span><span class="live-pill">${nbA} réponse${nbA !== 1 ? 's' : ''}</span>${warnings.length ? `<span class="live-pill warn">⚠️ ${warnings.length} avertissement${warnings.length !== 1 ? 's' : ''}</span>` : ''}`;
+  const { questions } = parseQuiz(txt, step2Forced);
+  const valid = questions.filter(q => q.valid);
+  const flagged = questions.filter(q => q.status === 'fallback' || q.status === 'error');
+  const nQcm = valid.filter(q => q.type === 'qcm').length;
+  const nVf = valid.filter(q => q.type === 'vf').length;
+  let pills = `<span class="live-pill ok">${valid.length} question${valid.length !== 1 ? 's' : ''}</span>`;
+  if (nQcm) pills += `<span class="live-pill">${nQcm} QCM</span>`;
+  if (nVf) pills += `<span class="live-pill">${nVf} V/F</span>`;
+  if (flagged.length) pills += `<span class="live-pill warn">⚠️ ${flagged.length} à vérifier</span>`;
+  el.innerHTML = pills;
 }
 
 function stripMarkdown(raw) {
@@ -567,27 +748,106 @@ function parseAnswerLine(line) {
   return { text: cleaned, correct };
 }
 
-function parseQCM(raw) {
+// ── Détection de tag en tête de bloc ──
+function detectTag(line) {
+  const m = line.match(/^\[\s*([a-zA-ZÀ-ÿ_\/ ]+?)\s*\]\s*$/);
+  if (!m) return null;
+  const norm = m[1].toUpperCase().replace(/[\s_\/]/g, '');
+  if (norm === 'QCM') return 'qcm';
+  if (norm === 'VF' || norm === 'VRAIFAUX' || norm === 'TRUEFALSE') return 'vf';
+  return 'unknown';
+}
+
+// ── Extraction des lignes C= (consigne) et E= (explication), par préfixe ──
+function extractCE(lines) {
+  let consigne = '', explanation = '';
+  const rest = [];
+  lines.forEach(l => {
+    const mc = l.match(/^C\s*=\s*(.*)$/i);
+    const me = l.match(/^E\s*=\s*(.*)$/i);
+    if (mc) consigne = mc[1].trim();
+    else if (me) explanation = me[1].trim();
+    else rest.push(l);
+  });
+  return { consigne, explanation, rest };
+}
+
+// ── Parsers par format ──
+function parseQcmBody(restLines) {
+  if (restLines.length < 2) return { ok: false, issue: 'QCM : question ou réponses manquantes.' };
+  const qText = stripQuestionPrefix(restLines[0]).trim();
+  const answers = restLines.slice(1).map(parseAnswerLine).filter(a => a.text.length > 0);
+  if (answers.length < 2) return { ok: false, issue: 'QCM : moins de 2 réponses détectées.' };
+  let softIssue = null;
+  if (answers.filter(a => a.correct).length === 0) { answers[0].correct = true; softIssue = 'aucune réponse en V=, la 1ʳᵉ choisie par défaut.'; }
+  return { ok: true, text: qText, answers, single: answers.filter(a => a.correct).length === 1, softIssue };
+}
+
+function parseVfBody(restLines) {
+  let vIdx = -1, vVal = null;
+  restLines.forEach((l, i) => {
+    const m = l.match(/^v\s*=\s*(.+)$/i);
+    if (m) {
+      const val = m[1].trim().toLowerCase();
+      if (/^(true|vrai|t|v)$/.test(val)) { vIdx = i; vVal = true; }
+      else if (/^(false|faux|f)$/.test(val)) { vIdx = i; vVal = false; }
+    }
+  });
+  if (vIdx === -1) return { ok: false, issue: 'Vrai/Faux attend une ligne V=True ou V=False.' };
+  const statement = restLines.filter((_, i) => i !== vIdx).map((l, idx) => idx === 0 ? stripQuestionPrefix(l) : l).join(' ').trim();
+  if (!statement) return { ok: false, issue: 'Vrai/Faux : affirmation vide.' };
+  return { ok: true, text: statement, answers: [{ text: 'True', correct: vVal === true }, { text: 'False', correct: vVal === false }], single: true };
+}
+
+// ── Parser principal multi-format ──
+// forcedTypes : objet optionnel { blockIdx: 'qcm'|'vf' } pour forcer un bloc via le sélecteur de repli
+function parseQuiz(raw, forcedTypes) {
+  forcedTypes = forcedTypes || {};
   const cleaned = stripMarkdown(raw.replace(/\r\n/g, '\n')).trim();
   let blocks = cleaned.split(/\n\s*\n+/).map(b => b.trim()).filter(b => b.length > 0);
   if (blocks.length <= 1) {
-    const alt = cleaned.split(/\n(?=\s*(?:\d+[\.\)]|Q(?:uestion)?\s*\d+)\s)/i).map(b => b.trim()).filter(b => b.length > 0);
+    const alt = cleaned.split(/\n(?=\s*(?:\[[A-Za-z]|\d+[\.\)]|Q(?:uestion)?\s*\d+)\s?)/i).map(b => b.trim()).filter(b => b.length > 0);
     if (alt.length > 1) blocks = alt;
   }
-  const questions = [], warnings = [];
+
+  // 1er passage : des tags sont-ils utilisés quelque part ?
+  const tagsUsed = blocks.some(b => detectTag(b.split('\n')[0].trim()) !== null);
+
+  const questions = [];
   blocks.forEach((block, i) => {
-    const lines = block.split('\n').map(l => l.trim()).filter(l => l.length > 0);
-    if (lines.length < 2) { warnings.push(`Bloc ${i + 1} ignoré : pas assez de contenu.`); return; }
-    let splitIdx = lines.findIndex(isAnswerLike);
-    if (splitIdx <= 0) splitIdx = 1;
-    const qText = lines.slice(0, splitIdx).map((l, idx) => idx === 0 ? stripQuestionPrefix(l) : l).join(' ').trim();
-    const answers = lines.slice(splitIdx).map(parseAnswerLine).filter(a => a.text.length > 0);
-    if (answers.length < 2) { warnings.push(`Question ${i + 1} ignorée ("${qText.slice(0, 40)}…") : moins de 2 réponses.`); return; }
-    let correctCount = answers.filter(a => a.correct).length;
-    if (correctCount === 0) { answers[0].correct = true; warnings.push(`Question ${i + 1} ("${qText.slice(0, 40)}…") : aucune réponse en V=, la 1ère choisie par défaut.`); }
-    questions.push({ text: qText, answers, single: answers.filter(a => a.correct).length === 1 });
+    let lines = block.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+    if (lines.length < 2) return;
+
+    const detected = detectTag(lines[0]);
+    if (detected !== null) lines = lines.slice(1);
+
+    // Résolution du type + statut
+    let type, status;
+    const forced = forcedTypes[i];
+    if (forced) { type = forced; status = 'forced'; }
+    else if (detected === 'qcm' || detected === 'vf') { type = detected; status = 'ok'; }
+    else if (detected === 'unknown') { type = 'qcm'; status = 'fallback'; }
+    else { type = 'qcm'; status = tagsUsed ? 'fallback' : 'ok'; }
+
+    const { consigne, explanation, rest } = extractCE(lines);
+    const parsed = type === 'vf' ? parseVfBody(rest) : parseQcmBody(rest);
+
+    if (!parsed.ok) {
+      questions.push({ blockIdx: i, num: i + 1, type, text: (rest[0] || '(bloc vide)').slice(0, 55), consigne, explanation, answers: [], single: true, status: 'error', issue: parsed.issue, raw: block, valid: false });
+      return;
+    }
+    let issue = null;
+    if (parsed.softIssue) { if (status === 'ok') status = 'fallback'; issue = parsed.softIssue; }
+    questions.push({ blockIdx: i, num: i + 1, type, text: parsed.text, consigne, explanation, answers: parsed.answers, single: parsed.single, status, issue, raw: block, valid: true });
   });
-  return { questions, warnings };
+  return { questions };
+}
+
+// Compat : ancienne signature { questions, warnings }
+function parseQCM(raw) {
+  const { questions } = parseQuiz(raw, {});
+  const warnings = questions.filter(q => q.status !== 'ok').map(q => `Q${q.num} : ${q.issue || (q.status === 'fallback' ? 'tag manquant → traité en QCM' : 'à vérifier')}`);
+  return { questions: questions.filter(q => q.valid), warnings };
 }
 
 function shuffleArray(arr) {
@@ -608,7 +868,8 @@ function buildXML(questions, meta, shuffle) {
     const fraction = Math.round(100 / correctCount);
     const orderedAnswers = shuffle ? shuffleArray(q.answers) : q.answers;
     xml += `<question type="multichoice">\n`;
-    xml += `  <questiontext format="html">\n    <text>${cdata('<p>' + q.text + '</p>')}</text>\n  </questiontext>\n`;
+    const qhtml = (q.consigne ? '<p><em>' + q.consigne + '</em></p>' : '') + '<p>' + q.text + '</p>';
+    xml += `  <questiontext format="html">\n    <text>${cdata(qhtml)}</text>\n  </questiontext>\n`;
     xml += `  <externallink/>\n  <usecase>1</usecase>\n  <defaultgrade>1</defaultgrade>\n  <editeur>0</editeur>\n  <single>${q.single ? 'true' : 'false'}</single>\n`;
     orderedAnswers.forEach(a => { xml += `  <answer fraction="${a.correct ? fraction : 0}" format="plain_text">\n    <text>${cdata(a.text)}</text>\n  </answer>\n`; });
     xml += `</question>\n`;
@@ -624,24 +885,63 @@ function convertToXML() {
     matiere: document.getElementById('matiere').value.trim()
   };
   const shuffle = document.getElementById('shuffleAnswers').checked;
-  const { questions, warnings } = parseQCM(rawText);
+  const { questions } = parseQuiz(rawText, step2Forced);
+  const valid = questions.filter(q => q.valid);
 
+  // Pastilles de stats
   const statsEl = document.getElementById('stats2'); statsEl.innerHTML = '';
+  const nQcm = valid.filter(q => q.type === 'qcm').length;
+  const nVf = valid.filter(q => q.type === 'vf').length;
   const pQ = document.createElement('div'); pQ.className = 'stat-pill ok';
-  pQ.textContent = `${questions.length} question${questions.length !== 1 ? 's' : ''} détectée${questions.length !== 1 ? 's' : ''}`;
+  pQ.textContent = `${valid.length} question${valid.length !== 1 ? 's' : ''}`;
   statsEl.appendChild(pQ);
-  if (warnings.length) { const pW = document.createElement('div'); pW.className = 'stat-pill warn'; pW.textContent = `${warnings.length} avertissement${warnings.length !== 1 ? 's' : ''}`; statsEl.appendChild(pW); }
+  if (nQcm) { const p = document.createElement('div'); p.className = 'stat-pill'; p.textContent = `${nQcm} QCM`; statsEl.appendChild(p); }
+  if (nVf) { const p = document.createElement('div'); p.className = 'stat-pill'; p.textContent = `${nVf} Vrai/Faux`; statsEl.appendChild(p); }
+  const nErr = questions.filter(q => q.status === 'error').length;
+  if (nErr) { const p = document.createElement('div'); p.className = 'stat-pill warn'; p.textContent = `${nErr} bloc${nErr !== 1 ? 's' : ''} en erreur`; statsEl.appendChild(p); }
 
-  const warnEl = document.getElementById('warnList2');
-  if (warnings.length) { warnEl.style.display = ''; warnEl.innerHTML = '⚠️ <strong>À vérifier :</strong><ul>' + warnings.map(w => `<li>${escXml(w)}</li>`).join('') + '</ul>'; }
-  else warnEl.style.display = 'none';
+  // Bandeau de repli inline
+  renderRepliBanner(questions);
 
-  if (questions.length === 0) { document.getElementById('xmlBox').textContent = '— Aucune question valide détectée. Vérifie le format (blocs séparés par une ligne vide, bonne réponse avec V=). —'; lastXML = ''; }
-  else { lastXML = buildXML(questions, meta, shuffle); document.getElementById('xmlBox').textContent = lastXML; }
+  if (valid.length === 0) { document.getElementById('xmlBox').textContent = '— Aucune question valide détectée. Vérifie le format (tag [QCM]/[VF], bonne réponse avec V=). —'; lastXML = ''; }
+  else { lastXML = buildXML(valid, meta, shuffle); document.getElementById('xmlBox').textContent = lastXML; }
 
   document.getElementById('result2').style.display = 'block';
   resetCopyBtn('copyBtn2', '📋 Copier le XML');
   document.getElementById('result2').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// Bandeau ambre : blocs sans tag, tags inconnus, ou erreurs — avec sélecteur de format par bloc
+function renderRepliBanner(questions) {
+  const el = document.getElementById('warnList2');
+  const flagged = questions.filter(q => q.status === 'fallback' || q.status === 'error' || q.status === 'forced');
+  if (flagged.length === 0) { el.style.display = 'none'; el.innerHTML = ''; return; }
+
+  let html = '<div class="repli-banner">';
+  html += `<div class="repli-head">⚠ ${flagged.length} bloc${flagged.length !== 1 ? 's' : ''} à vérifier — corrige le format sur place :</div>`;
+  flagged.forEach(q => {
+    const isErr = q.status === 'error';
+    const isForced = q.status === 'forced';
+    let note;
+    if (isErr) note = `<strong>${escXml(q.issue || 'bloc invalide')}</strong>`;
+    else if (isForced) note = `format forcé <span class="repli-fixed">✓ corrigé</span>`;
+    else note = q.issue ? escXml(q.issue) : 'tag manquant → traité en QCM';
+    html += `<div class="repli-item${isErr ? ' err' : ''}">`;
+    html += `<span class="repli-q"><strong>Q${q.num}</strong> « ${escXml(q.text)}${q.text.length >= 55 ? '…' : ''} » — ${note}</span>`;
+    html += `<select onchange="reparseBlock(${q.blockIdx}, this.value)">`;
+    html += `<option value="qcm"${q.type === 'qcm' ? ' selected' : ''}>QCM</option>`;
+    html += `<option value="vf"${q.type === 'vf' ? ' selected' : ''}>Vrai / Faux</option>`;
+    html += `</select></div>`;
+  });
+  html += '</div>';
+  el.style.display = '';
+  el.innerHTML = html;
+}
+
+// Sélecteur inline : force un bloc dans un format et re-parse tout
+function reparseBlock(blockIdx, type) {
+  step2Forced[blockIdx] = type;
+  convertToXML();
 }
 
 function copyXML() { if (!lastXML) return; navigator.clipboard.writeText(lastXML).then(() => flashCopy('copyBtn2', '✅ Copié !', '📋 Copier le XML')); }
@@ -663,6 +963,359 @@ function flashCopy(id, flashText, originalText) {
 }
 function resetCopyBtn(id, text) { const btn = document.getElementById(id); btn.textContent = text; btn.classList.remove('copied'); }
 
+// ══ SETTINGS ══════════════════════════════════════════════════
+function toggleSettings() {
+  document.getElementById('settingsPanel').classList.toggle('open');
+}
+function saveBaseUrl() {
+  localStorage.setItem('ql_base_url', document.getElementById('baseUrl').value.trim());
+}
+function loadBaseUrl() {
+  const v = localStorage.getItem('ql_base_url') || '';
+  document.getElementById('baseUrl').value = v;
+}
+
+// ══ WEB EXPORT ══════════════════════════════════════════════════
+
+const webExportedNames = new Set();
+
+function sanitizeFilename(title) {
+  let name = title.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    || 'quiz';
+  // Deduplicate within session
+  let candidate = name;
+  let counter = 1;
+  while (webExportedNames.has(candidate)) {
+    counter++;
+    candidate = name + '-' + counter;
+  }
+  webExportedNames.add(candidate);
+  return candidate;
+}
+
+let lastWebHTML = '';
+let lastWebFilename = '';
+
+function exportWebQuiz() {
+  const rawText = document.getElementById('pasteArea2').value.trim();
+  if (!rawText) { alert('Colle d\'abord la reponse de Claude dans l\'etape 2.'); return; }
+
+  const { questions } = parseQuiz(rawText, step2Forced);
+  const valid = questions.filter(q => q.valid);
+  if (valid.length === 0) { alert('Aucune question valide detectee. Verifie le format.'); return; }
+
+  const title = document.getElementById('webQuizTitle').value.trim() || document.getElementById('nomQcm').value.trim() || 'Quiz';
+  const niveau = document.getElementById('niveauMeta').value.trim();
+  const filename = sanitizeFilename(title);
+  lastWebFilename = filename + '.html';
+
+  // Build quiz data for export
+  const quizData = {
+    title: title,
+    level: niveau,
+    generated: new Date().toISOString().slice(0, 10),
+    questions: valid.map(q => ({
+      type: q.type,
+      text: q.text,
+      instruction: q.consigne || '',
+      answers: q.answers.map(a => ({ text: a.text, correct: a.correct })),
+      single: q.single,
+      explanation: q.explanation || ''
+    }))
+  };
+
+  lastWebHTML = buildWebQuizHTML(quizData);
+
+  // Stats
+  const statsEl = document.getElementById('statsWeb');
+  statsEl.innerHTML = '<span class="stat-pill ok">' + valid.length + ' question' + (valid.length !== 1 ? 's' : '') + '</span><span class="stat-pill">' + lastWebFilename + '</span>';
+
+  // URL display
+  const base = document.getElementById('baseUrl').value.trim();
+  const urlEl = document.getElementById('webQuizUrl');
+  const urlWrap = document.getElementById('urlDisplay');
+  if (base) {
+    const fullUrl = (base.endsWith('/') ? base : base + '/') + lastWebFilename;
+    urlEl.textContent = fullUrl;
+    urlWrap.style.display = 'flex';
+  } else {
+    urlEl.textContent = lastWebFilename;
+    urlWrap.style.display = 'flex';
+  }
+
+  document.getElementById('dlWebBtn').style.display = '';
+  document.getElementById('resultWeb').style.display = 'block';
+  document.getElementById('resultWeb').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function copyWebUrl() {
+  const url = document.getElementById('webQuizUrl').textContent;
+  navigator.clipboard.writeText(url).then(() => {
+    flashCopy('copyUrlBtn', '✅ Copied!', '📋 Copy URL');
+  });
+}
+
+function downloadWebQuiz() {
+  if (!lastWebHTML) return;
+  const blob = new Blob([lastWebHTML], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = lastWebFilename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+// Update export button state when step 2 textarea changes
+const origOnText2Input = onText2Input;
+onText2Input = function() {
+  origOnText2Input();
+  document.getElementById('genBtnWeb').disabled = !document.getElementById('pasteArea2').value.trim();
+};
+
+function buildWebQuizHTML(data) {
+  const jsonData = JSON.stringify(data);
+  const dateStr = data.generated;
+  const titleStr = data.title;
+  const safeTitle = titleStr.replace(/--/g, '\u2013');
+  const htmlTitle = titleStr.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  const css = [
+'/* ── Customise your quiz colours ──────────────────────────────── */',
+'/* Change these 4 values to match your site colours              */',
+'/* --quiz-primary: main accent (buttons, progress, links)        */',
+'/* --quiz-primary-light: light tint of accent (hover, badges)    */',
+'/* --quiz-bg: page background                                    */',
+'/* --quiz-card: question card background                         */',
+'/* ─────────────────────────────────────────────────────────────── */',
+':root {',
+'  --quiz-primary: #1a9ab4;',
+'  --quiz-primary-light: #e0f4f7;',
+'  --quiz-bg: #eef7fa;',
+'  --quiz-card: #ffffff;',
+'  --quiz-text: #1e293b;',
+'  --quiz-text-muted: #6b8a95;',
+'  --quiz-border: #c8dfe6;',
+'  --quiz-correct: #16a34a;',
+'  --quiz-correct-bg: #dcfce7;',
+'  --quiz-wrong: #dc2626;',
+'  --quiz-wrong-bg: #fee2e2;',
+'  --quiz-radius: 10px;',
+'}',
+'*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }',
+'html { background: var(--quiz-bg); }',
+'body { font-family: "Inter", system-ui, sans-serif; font-size: 15px; background: var(--quiz-bg); color: var(--quiz-text); min-height: 100vh; margin: 0; padding: 20px 16px; }',
+'#quiz-app { width: 100%; max-width: 700px; margin: 0 auto; }',
+'.start-screen { text-align: center; padding: 48px 24px; }',
+'.start-screen h1 { font-size: 22px; font-weight: 700; margin-bottom: 8px; color: var(--quiz-text); }',
+'.start-screen .level { display: inline-block; padding: 3px 12px; border-radius: 99px; background: var(--quiz-primary-light); color: var(--quiz-primary); font-size: 13px; font-weight: 600; margin-bottom: 16px; }',
+'.start-screen .info { font-size: 14px; color: var(--quiz-text-muted); margin-bottom: 28px; }',
+'.btn { display: inline-block; padding: 12px 32px; border-radius: var(--quiz-radius); border: none; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; transition: opacity 0.15s; }',
+'.btn:hover { opacity: 0.85; }',
+'.btn-primary { background: var(--quiz-primary); color: #fff; }',
+'.btn-outline { background: transparent; border: 1px solid var(--quiz-border); color: var(--quiz-text); padding: 10px 24px; font-size: 14px; }',
+'.btn-small { padding: 8px 18px; font-size: 13px; }',
+'.progress-bar { height: 6px; background: var(--quiz-border); border-radius: 3px; margin-bottom: 20px; overflow: hidden; }',
+'.progress-fill { height: 100%; background: var(--quiz-primary); border-radius: 3px; transition: width 0.3s; }',
+'.question-num { font-size: 13px; color: var(--quiz-text-muted); margin-bottom: 12px; font-weight: 500; }',
+'.q-card { background: var(--quiz-card); border: 1px solid var(--quiz-border); border-radius: var(--quiz-radius); padding: 24px; margin-bottom: 16px; }',
+'.q-instruction { font-size: 14px; color: var(--quiz-text-muted); margin-bottom: 10px; }',
+'.q-text { font-size: 16px; font-weight: 600; line-height: 1.5; margin-bottom: 20px; }',
+'.options { display: flex; flex-direction: column; gap: 8px; }',
+'.option { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--quiz-border); border-radius: 8px; cursor: pointer; transition: all 0.15s; font-size: 14px; line-height: 1.4; }',
+'.option:hover:not(.disabled) { border-color: var(--quiz-primary); background: var(--quiz-primary-light); }',
+'.option.selected { border-color: var(--quiz-primary); background: var(--quiz-primary-light); }',
+'.option.correct { border-color: var(--quiz-correct); background: var(--quiz-correct-bg); }',
+'.option.wrong { border-color: var(--quiz-wrong); background: var(--quiz-wrong-bg); }',
+'.option.disabled { cursor: default; opacity: 0.85; }',
+'.option .marker { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--quiz-border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; }',
+'.option.selected .marker { border-color: var(--quiz-primary); background: var(--quiz-primary); color: #fff; }',
+'.option.correct .marker { border-color: var(--quiz-correct); background: var(--quiz-correct); color: #fff; }',
+'.option.wrong .marker { border-color: var(--quiz-wrong); background: var(--quiz-wrong); color: #fff; }',
+'.checkbox-marker { border-radius: 4px !important; }',
+'.feedback { margin-top: 14px; padding: 12px 14px; border-radius: 8px; font-size: 14px; font-weight: 500; }',
+'.feedback.correct { background: var(--quiz-correct-bg); color: var(--quiz-correct); }',
+'.feedback.wrong { background: var(--quiz-wrong-bg); color: var(--quiz-wrong); }',
+'.next-wrap { margin-top: 16px; text-align: right; }',
+'.results-screen { text-align: center; }',
+'.score-display { font-size: 48px; font-weight: 700; color: var(--quiz-primary); margin: 16px 0 4px; }',
+'.score-label { font-size: 15px; color: var(--quiz-text-muted); margin-bottom: 4px; }',
+'.score-message { font-size: 18px; font-weight: 600; margin-bottom: 24px; }',
+'.score-attempts { font-size: 13px; color: var(--quiz-text-muted); margin-bottom: 20px; }',
+'.score-attempts span { font-weight: 600; color: var(--quiz-text); }',
+'.review-section { text-align: left; margin-top: 24px; }',
+'.review-toggle { font-size: 13px; color: var(--quiz-primary); cursor: pointer; text-decoration: underline; margin-bottom: 16px; display: inline-block; }',
+'.review-item { background: var(--quiz-card); border: 1px solid var(--quiz-border); border-radius: 8px; padding: 16px; margin-bottom: 10px; }',
+'.review-item .q-num { font-size: 12px; color: var(--quiz-text-muted); font-weight: 600; margin-bottom: 6px; }',
+'.review-item .q-text-review { font-size: 14px; font-weight: 600; margin-bottom: 10px; line-height: 1.4; }',
+'.review-answer { font-size: 13px; padding: 6px 10px; border-radius: 6px; margin-bottom: 4px; }',
+'.review-answer.your-wrong { background: var(--quiz-wrong-bg); color: var(--quiz-wrong); }',
+'.review-answer.correct-answer { background: var(--quiz-correct-bg); color: var(--quiz-correct); }',
+'.review-answer.your-correct { background: var(--quiz-correct-bg); color: var(--quiz-correct); }',
+'.review-explanation { margin-top: 8px; font-size: 13px; color: var(--quiz-text-muted); line-height: 1.5; padding: 8px 10px; background: var(--quiz-primary-light); border-radius: 6px; }',
+'.results-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }'
+  ].join('\n');
+
+  const js = [
+'(function(){',
+'"use strict";',
+'var DATA = __QUIZ_DATA__;',
+'var app = document.getElementById("quiz-app");',
+'var state = { current: 0, answers: [], phase: "start", retryMode: false, retryIndices: null, firstScore: null, retryScores: [] };',
+'function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }',
+'function esc(s) { var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }',
+'var SQ;',
+'function initQ(indices) {',
+'  var idxs = indices || shuffle(DATA.questions.map(function(_, i) { return i; }));',
+'  SQ = idxs.map(function(i) { var q = JSON.parse(JSON.stringify(DATA.questions[i])); q._oi = i; q.answers = shuffle(q.answers); return q; });',
+'}',
+'function emitH() { try { window.parent.postMessage({ type: "quizloom-height", height: app.offsetHeight + 40 }, "*"); } catch(e) {} }',
+'if (typeof ResizeObserver !== "undefined") new ResizeObserver(emitH).observe(app);',
+'window.addEventListener("resize", emitH);',
+'',
+'function renderStart() {',
+'  app.innerHTML = "<div class=\\"start-screen\\"><h1>" + esc(DATA.title) + "</h1>" +',
+'    (DATA.level ? "<div class=\\"level\\">" + esc(DATA.level) + "</div>" : "") +',
+'    "<div class=\\"info\\">" + DATA.questions.length + " question" + (DATA.questions.length !== 1 ? "s" : "") + "</div>" +',
+'    "<button class=\\"btn btn-primary\\" id=\\"startBtn\\">Start</button></div>";',
+'  document.getElementById("startBtn").onclick = function() {',
+'    initQ(null); state.current = 0; state.answers = []; state.phase = "play";',
+'    state.retryMode = false; state.firstScore = null; state.retryScores = [];',
+'    renderQ();',
+'  };',
+'  emitH();',
+'}',
+'',
+'function renderQ() {',
+'  var idx = state.current, q = SQ[idx], total = SQ.length;',
+'  var pct = Math.round((idx / total) * 100);',
+'  var h = "<div class=\\"progress-bar\\"><div class=\\"progress-fill\\" style=\\"width:" + pct + "%\\"></div></div>";',
+'  h += "<div class=\\"question-num\\">" + (idx + 1) + " / " + total + "</div>";',
+'  h += "<div class=\\"q-card\\">";',
+'  if (q.instruction) h += "<div class=\\"q-instruction\\">" + esc(q.instruction) + "</div>";',
+'  h += "<div class=\\"q-text\\">" + esc(q.text) + "</div>";',
+'  h += "<div class=\\"options\\" id=\\"opts\\">";',
+'  q.answers.forEach(function(a, ai) {',
+'    h += "<div class=\\"option\\" data-idx=\\"" + ai + "\\"><div class=\\"marker" + (q.single ? "" : " checkbox-marker") + "\\"></div><span>" + esc(a.text) + "</span></div>";',
+'  });',
+'  h += "</div>";',
+'  if (!q.single) h += "<div style=\\"margin-top:14px\\"><button class=\\"btn btn-primary btn-small\\" id=\\"checkBtn\\">Check</button></div>";',
+'  h += "<div id=\\"feedback\\"></div>";',
+'  h += "<div class=\\"next-wrap\\" id=\\"nextW\\" style=\\"display:none\\"><button class=\\"btn btn-primary btn-small\\" id=\\"nextBtn\\">Next</button></div>";',
+'  h += "</div>";',
+'  app.innerHTML = h;',
+'  var sel = [], done = false;',
+'  function check() {',
+'    if (done) return; done = true;',
+'    var ci = []; q.answers.forEach(function(a, i) { if (a.correct) ci.push(i); });',
+'    var ok = ci.length === sel.length && ci.every(function(c) { return sel.indexOf(c) !== -1; });',
+'    document.querySelectorAll(".option").forEach(function(o) {',
+'      o.classList.add("disabled"); var oi = parseInt(o.getAttribute("data-idx"));',
+'      if (q.answers[oi].correct) o.classList.add("correct");',
+'      else if (sel.indexOf(oi) !== -1) o.classList.add("wrong");',
+'    });',
+'    var fb = document.getElementById("feedback");',
+'    if (ok) { fb.innerHTML = "<div class=\\"feedback correct\\">Correct!</div>"; state.answers.push({ oi: q._oi, correct: true, sel: sel.slice() }); }',
+'    else { var ct = ci.map(function(i) { return q.answers[i].text; }).join(", "); fb.innerHTML = "<div class=\\"feedback wrong\\">The answer was: " + esc(ct) + "</div>"; state.answers.push({ oi: q._oi, correct: false, sel: sel.slice() }); }',
+'    var cb = document.getElementById("checkBtn"); if (cb) cb.style.display = "none";',
+'    document.getElementById("nextW").style.display = "";',
+'    document.getElementById("nextBtn").textContent = idx === total - 1 ? "See results" : "Next";',
+'    document.getElementById("nextBtn").onclick = function() { state.current++; if (state.current >= total) renderR(); else renderQ(); };',
+'    emitH();',
+'  }',
+'  document.querySelectorAll(".option").forEach(function(el) {',
+'    el.onclick = function() {',
+'      if (done) return; var ai = parseInt(el.getAttribute("data-idx"));',
+'      if (q.single) { sel = [ai]; document.querySelectorAll(".option").forEach(function(o) { o.classList.remove("selected"); }); el.classList.add("selected"); check(); }',
+'      else { var p = sel.indexOf(ai); if (p === -1) { sel.push(ai); el.classList.add("selected"); } else { sel.splice(p, 1); el.classList.remove("selected"); } }',
+'    };',
+'  });',
+'  var ckb = document.getElementById("checkBtn"); if (ckb) ckb.onclick = function() { if (sel.length > 0) check(); };',
+'  emitH();',
+'}',
+'',
+'function renderR() {',
+'  state.phase = "results";',
+'  var correct = state.answers.filter(function(a) { return a.correct; }).length;',
+'  var total = SQ.length, pct = Math.round((correct / total) * 100);',
+'  var msg = pct >= 90 ? "Excellent!" : pct >= 75 ? "Well done!" : pct >= 50 ? "Keep practising!" : "Don\'t give up, try again!";',
+'  if (!state.retryMode && state.firstScore === null) state.firstScore = { c: correct, t: total };',
+'  else if (state.retryMode) state.retryScores.push({ c: correct, t: total });',
+'  var wrongOI = []; state.answers.forEach(function(a) { if (!a.correct) wrongOI.push(a.oi); });',
+'  var h = "<div class=\\"results-screen\\">";',
+'  h += "<div class=\\"score-display\\">" + correct + " / " + total + "</div>";',
+'  h += "<div class=\\"score-label\\">" + pct + "%</div>";',
+'  h += "<div class=\\"score-message\\">" + msg + "</div>";',
+'  if (state.firstScore && state.retryScores.length > 0) {',
+'    h += "<div class=\\"score-attempts\\">First attempt: <span>" + state.firstScore.c + " / " + state.firstScore.t + "</span>";',
+'    state.retryScores.forEach(function(rs, i) { h += " &middot; After review " + (i + 1) + ": <span>" + rs.c + " / " + rs.t + "</span>"; });',
+'    h += "</div>";',
+'  }',
+'  h += "<div class=\\"review-section\\">";',
+'  if (wrongOI.length > 0) h += "<h3 style=\\"font-size:15px;margin-bottom:6px\\">Your mistakes</h3>";',
+'  state.answers.forEach(function(ans, i) {',
+'    var q = SQ[i], isW = !ans.correct;',
+'    h += "<div class=\\"review-item\\" style=\\"" + (isW ? "" : "display:none") + "\\" data-rt=\\"" + (isW ? "w" : "r") + "\\">";',
+'    h += "<div class=\\"q-num\\">Question " + (i + 1) + "</div>";',
+'    h += "<div class=\\"q-text-review\\">" + esc(q.text) + "</div>";',
+'    if (isW) {',
+'      var yt = ans.sel.map(function(si) { return q.answers[si].text; });',
+'      h += "<div class=\\"review-answer your-wrong\\">Your answer: " + esc(yt.join(", ")) + "</div>";',
+'      var ct = q.answers.filter(function(a) { return a.correct; }).map(function(a) { return a.text; });',
+'      h += "<div class=\\"review-answer correct-answer\\">Correct: " + esc(ct.join(", ")) + "</div>";',
+'    } else {',
+'      var ct2 = q.answers.filter(function(a) { return a.correct; }).map(function(a) { return a.text; });',
+'      h += "<div class=\\"review-answer your-correct\\">Your answer: " + esc(ct2.join(", ")) + "</div>";',
+'    }',
+'    if (q.explanation) h += "<div class=\\"review-explanation\\">" + esc(q.explanation) + "</div>";',
+'    h += "</div>";',
+'  });',
+'  if (state.answers.some(function(a) { return a.correct; })) h += "<div class=\\"review-toggle\\" id=\\"togAll\\">Show all answers</div>";',
+'  h += "</div>";',
+'  h += "<div class=\\"results-actions\\">";',
+'  if (wrongOI.length > 0) h += "<button class=\\"btn btn-primary btn-small\\" id=\\"retryBtn\\">Redo wrong answers only</button>";',
+'  h += "<button class=\\"btn btn-outline btn-small\\" id=\\"restartBtn\\">Start over</button>";',
+'  h += "</div></div>";',
+'  app.innerHTML = h;',
+'  var tog = document.getElementById("togAll");',
+'  if (tog) { var showAll = false; tog.onclick = function() { showAll = !showAll; document.querySelectorAll("[data-rt=r]").forEach(function(el) { el.style.display = showAll ? "" : "none"; }); tog.textContent = showAll ? "Show mistakes only" : "Show all answers"; emitH(); }; }',
+'  var rb = document.getElementById("retryBtn");',
+'  if (rb) rb.onclick = function() { state.retryMode = true; initQ(wrongOI.slice()); state.current = 0; state.answers = []; state.phase = "play"; renderQ(); };',
+'  document.getElementById("restartBtn").onclick = function() { state = { current: 0, answers: [], phase: "start", retryMode: false, retryIndices: null, firstScore: null, retryScores: [] }; renderStart(); };',
+'  emitH();',
+'}',
+'renderStart();',
+'})();'
+  ].join('\n');
+
+  const parts = [];
+  parts.push('<!-- QuizLoom Export | ' + safeTitle + ' | ' + dateStr + ' -->');
+  parts.push('<!DOCTYPE html>');
+  parts.push('<html lang="en">');
+  parts.push('<head>');
+  parts.push('<meta charset="UTF-8">');
+  parts.push('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
+  parts.push('<title>' + htmlTitle + '</title>');
+  parts.push('<link rel="preconnect" href="https://fonts.googleapis.com">');
+  parts.push('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
+  parts.push('<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">');
+  parts.push('<style>');
+  parts.push(css);
+  parts.push('</style>');
+  parts.push('</head>');
+  parts.push('<body>');
+  parts.push('<div id="quiz-app"></div>');
+  parts.push('<scr' + 'ipt>');
+  parts.push(js.replace('__QUIZ_DATA__', jsonData));
+  parts.push('</scr' + 'ipt>');
+  parts.push('</body>');
+  parts.push('</html>');
+  return parts.join('\n');
+}
+
+// Load settings on init
+document.addEventListener("DOMContentLoaded", function() { loadBaseUrl(); });
+
 // ══ TOUR & DÉMO ══════════════════════════════════════════════════
 
 const DEMO_TEXT = `=== SÉQUENCE : Once Upon a Time\u2026 Fairy Tales Revisited | Niveau : 2NDE B1+ ===
@@ -683,48 +1336,53 @@ Trace écrite : In the film Maleficent (2014), the traditional villain from Slee
 const TOUR_STEPS = [
   {
     target: null,
-    title: 'Étape 1 / 9',
-    text: 'Bienvenue dans QuizLoom\u00a0! En 3 étapes tu passes de ta séance Lesson Loom à un QCM importable dans Pronote. Ce tour te montre comment.'
+    title: 'Étape 1 / 10',
+    text: 'Bienvenue dans QuizLoom\u00a0! Tu pars d\u2019une séance Lesson Loom et tu obtiens soit un QCM importable dans Pronote, soit un quiz web interactif à intégrer sur un site. Ce tour te montre comment.'
   },
   {
     target: '#pane1-text',
-    title: 'Étape 2 / 9',
+    title: 'Étape 2 / 10',
     text: 'Dans Lesson Loom, ouvre une séance \u2192 menu Exporter \u2192 \u26a1 Copier pour QuizLoom. Un sélecteur te permet de choisir 1, 2 ou toute la séquence. Le texte se copie dans le presse-papier — colle-le ici.'
   },
   {
     target: '.tabs',
-    title: 'Étape 3 / 9',
+    title: 'Étape 3 / 10',
     text: 'Tu peux aussi importer directement le fichier RTF exporté par Lesson Loom. Les deux modes donnent le même résultat.'
   },
   {
-    target: '.grid3',
-    title: 'Étape 4 / 9',
-    text: 'Configure le nombre de questions, le niveau CECRL et le type — compréhension littérale, vocabulaire, inférence, grammaire\u2026 ou mixte pour varier.'
+    target: '.format-checks',
+    title: 'Étape 4 / 10',
+    text: 'Choisis le nombre de questions, le niveau, puis coche les formats à mélanger (QCM, Vrai/Faux). L\u2019angle de contenu — compréhension, vocabulaire, grammaire\u2026 — est optionnel et affine les questions.'
   },
   {
     target: '#genBtn1',
-    title: 'Étape 5 / 9',
-    text: 'Clique ici. QuizLoom construit un prompt complet avec les instructions de format déjà incluses — prêt à envoyer à Claude.'
+    title: 'Étape 5 / 10',
+    text: 'Clique ici. QuizLoom construit un prompt complet, avec les consignes de format déjà incluses — prêt à envoyer à Claude.'
   },
   {
     target: '#result1',
-    title: 'Étape 6 / 9',
-    text: 'Copie le prompt, ouvre Claude.ai, colle et envoie. Claude génère le QCM dans le bon format. Reviens ici avec sa réponse pour l\u2019étape 2.'
+    title: 'Étape 6 / 10',
+    text: 'Copie le prompt, ouvre Claude.ai, colle et envoie. Claude génère les questions dans le bon format. Reviens ici avec sa réponse pour l\u2019étape suivante.'
   },
   {
     target: '#pasteArea2',
-    title: 'Étape 7 / 9',
-    text: 'Colle ici la réponse de Claude. QuizLoom compte les questions en direct et vérifie le format automatiquement.'
+    title: 'Étape 7 / 10',
+    text: 'Colle ici la réponse de Claude. QuizLoom compte les questions en direct et vérifie le format. Si un bloc est mal repéré, un petit menu te laisse corriger son format sur place, sans tout régénérer.'
   },
   {
     target: '#genBtn2',
-    title: 'Étape 8 / 9',
-    text: 'Remplis le nom du QCM et clique. QuizLoom génère le fichier XML Pronote. Télécharge-le puis importe-le dans Pronote : Outils pédagogiques \u2192 QCM \u2192 Importer.'
+    title: 'Étape 8 / 10',
+    text: 'Pour Pronote\u00a0: remplis le nom du QCM et clique. QuizLoom génère le fichier XML. Télécharge-le, puis importe-le dans Pronote via Outils pédagogiques \u2192 QCM \u2192 Importer.'
+  },
+  {
+    target: '#genBtnWeb',
+    title: 'Étape 9 / 10',
+    text: 'Pour le web\u00a0: donne un titre et clique pour exporter un quiz interactif en un seul fichier HTML. Il se joue dans le navigateur et s\u2019intègre sur n\u2019importe quel site (en iframe). Idéal pour la révision en autonomie.'
   },
   {
     target: null,
-    title: 'Étape 9 / 9 — Terminé\u00a0!',
-    text: 'Dans Pronote\u00a0: Outils pédagogiques \u2192 QCM \u2192 Importer \u2192 sélectionne le fichier. Tu veux voir un exemple concret avec une vraie séance d\u2019anglais\u00a0?',
+    title: 'Étape 10 / 10 — Terminé\u00a0!',
+    text: 'Voilà\u00a0! QCM Pronote ou quiz web, à partir d\u2019une seule séance. Tu veux voir un exemple concret avec une vraie séance d\u2019anglais\u00a0?',
     isLast: true
   }
 ];
@@ -873,7 +1531,10 @@ function launchDemo() {
   // Set options
   document.getElementById('nbQ').value = '5';
   document.getElementById('niveau1').value = 'B1+';
-  document.getElementById('typeQ').value = 'comprehension_litterale';
+  document.getElementById('contentAngle').value = 'comprehension_litterale';
+  document.getElementById('fmt-qcm').checked = true;
+  document.getElementById('fmt-vf').checked = true;
+  updateFormatHint();
   // Scroll to top of form
   document.querySelector('.card').scrollIntoView({ behavior: 'smooth', block: 'start' });
   // Show demo toast
@@ -884,33 +1545,6 @@ function launchDemo() {
     document.body.appendChild(toast);
     setTimeout(() => { toast.style.transition = 'opacity .4s'; toast.style.opacity = '0'; setTimeout(() => toast.remove(), 450); }, 3500);
   }, 400);
-}
-
-
-function resetAll() {
-  // Step 1 — clear input
-  document.getElementById('pasteArea1').value = '';
-  extractedText1 = '';
-  updateBtn1();
-  document.getElementById('result1').style.display = 'none';
-  document.getElementById('promptBox').textContent = '';
-  // Reset RTF zone
-  var dz = document.getElementById('dropZone1');
-  if (dz) dz.classList.remove('has-file');
-  var lbl = document.getElementById('dropLabel1');
-  if (lbl) { lbl.textContent = 'Cliquer pour choisir un fichier RTF exporté par Lesson Loom'; lbl.className = 'drop-label'; }
-  var prev = document.getElementById('preview1');
-  if (prev) prev.style.display = 'none';
-  // Step 2 — clear response + result
-  document.getElementById('pasteArea2').value = '';
-  document.getElementById('liveStats2').innerHTML = '';
-  document.getElementById('genBtn2').disabled = true;
-  document.getElementById('result2').style.display = 'none';
-  document.getElementById('xmlBox').textContent = '';
-  document.getElementById('nomQcm').value = '';
-  lastXML = '';
-  // Scroll to top
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 </script>
