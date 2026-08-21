@@ -117,9 +117,13 @@ Dans Lesson Loom, le menu **Exporter → ⚡ Copier pour QuizLoom** ouvre un sé
 
 ## Licence et auteure
 
-Outil pédagogique personnel — usage non commercial.
+**GNU Affero General Public License v3 (AGPLv3)** — © Juin 2026 Maïwena Gadegbeku
+
+Vous êtes libre d'utiliser, d'étudier, de modifier et de redistribuer cet outil. En contrepartie, toute version modifiée qui est redistribuée **ou mise à disposition sur un serveur** doit être publiée sous cette même licence, code source compris.
+
+Voir le fichier [LICENSE](LICENSE) pour le texte complet, et <https://www.gnu.org/licenses/agpl-3.0.html> pour la licence officielle.
 
 🪄 **QuizLoom** — Développé pour les enseignants d'anglais LV1 dans le secondaire français.
 Compagnon de **Lesson Loom** — inspiré de [l'interface Gemini QCM](https://interface-gemini-3377c4.forge.apps.education.fr/#/qcm).
 
-© Juin 2026 [Maïwena Gadegbeku](mailto:maiwena.gadegbeku@ac-rennes.fr)
+Contact : [contact@lessonloom.fr](mailto:contact@lessonloom.fr)
