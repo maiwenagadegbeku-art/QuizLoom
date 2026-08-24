@@ -61,26 +61,37 @@ Une fois que Claude.ai a répondu, copie sa réponse et colle-la dans la zone de
 **Format attendu** — les consignes sont déjà incluses dans le prompt, la réponse arrive donc au bon format :
 
 ```
+[QCM]
+C=Choose the correct answer.
 What is the capital of the UK?
 V=London
 Paris
 Dublin
-Edinburgh
+E=The document states that London is the capital of the United Kingdom.
 
-Who wrote "Romeo and Juliet"?
-Charles Dickens
-V=William Shakespeare
-Jane Austen
-Oscar Wilde
+[VF]
+C=True or false?
+Shakespeare wrote "Romeo and Juliet".
+V=True
+E=The text names Shakespeare as the author of the play.
 ```
 
-Chaque bonne réponse commence par `V=`. Les blocs sont séparés par une ligne vide.
+Chaque bloc commence par son tag — `[QCM]` ou `[VF]` — sur sa propre ligne, et les blocs
+sont séparés par une ligne vide. Dans chaque bloc : `C=` la consigne adressée à l'élève,
+`V=` la ou les bonnes réponses, `E=` l'explication. Les autres propositions n'ont pas de
+préfixe.
 
-QuizLoom compte les questions en direct et vérifie le format. **Si un bloc est mal repéré, un bandeau apparaît** et un menu permet de corriger son format sur place, sans repasser par Claude.
+Un format plus simple, sans tag ni `C=` ni `E=`, reste accepté : QuizLoom traite alors le
+bloc comme un QCM. Mais l'explication `E=` alimente le quiz web, et sans elle les élèves
+n'ont aucun retour après leur réponse.
+
+QuizLoom compte les questions en direct et vérifie le format. **Si un bloc est mal repéré, un encadré orange apparaît** — pendant la saisie, puis de nouveau après la génération — nommant chaque bloc en cause, avec un menu qui permet de corriger son format sur place, sans repasser par Claude.
+
+> ⚠️ **Un bloc sans `V=`.** Si l'assistant oublie de marquer la bonne réponse, QuizLoom **retient la première proposition** pour ne pas perdre la question, et le signale en orange. Cette réponse par défaut a toutes les chances d'être fausse : vérifiez-la avant d'importer dans Pronote.
 
 **Remplis les métadonnées** :
-- Nom du QCM (ex : `Séance 3 — Maleficent`)
-- Classe / Niveau (ex : `2NDE 3`)
+- Nom du QCM (ex : `Séance 3 — Vocab`)
+- Classe / Niveau (ex : `3E`, `2NDE`…)
 - Matière (pré-remplie : `Anglais`)
 
 Coche **Mélanger l'ordre des réponses** (recommandé) → clique **🧩 Générer le fichier XML Pronote** → **⬇️ Télécharger le .xml**.
@@ -95,7 +106,9 @@ La même réponse peut aussi devenir un **quiz jouable dans le navigateur** : un
 2. Clique **🌐 Export web quiz**
 3. **⬇️ Download HTML** pour récupérer le fichier
 
-**Réglage à faire une seule fois** (bouton ⚙ en haut) : indique l'adresse de base de ton site, par exemple `https://mon-site.fr/quiz/`. QuizLoom construit alors l'adresse complète de chaque quiz exporté, que tu peux copier d'un clic (**📋 Copy URL**) pour la donner à tes élèves.
+**Réglage à faire une seule fois** — le bouton **⚙ Settings**, tout en bas de la page, sous le XML : indique l'adresse de base de ton site, par exemple `https://mon-site.fr/quiz/`. QuizLoom construit alors l'adresse complète de chaque quiz exporté, que tu peux copier d'un clic (**📋 Copy URL**) pour la donner à tes élèves.
+
+Sans cette adresse de base, le bouton **📋 Copy URL** ne copie que le **nom du fichier**, pas une adresse : renseigne-la avant de partager un lien.
 
 Le fichier obtenu ne dépend d'aucun serveur : il se joue tel quel.
 
@@ -139,7 +152,7 @@ Dans Lesson Loom, le menu **Exporter → ⚡ Copier pour QuizLoom** ouvre un sé
 
 - Le contenu de la séance est tronqué à 3 000 caractères dans le prompt (suffisant pour une séance complète)
 - La qualité du QCM dépend du contenu fourni — plus la séance est détaillée, meilleures sont les questions
-- Quelques libellés de l'étape 3 sont encore en anglais
+- Les libellés de l'étape 3 sont en anglais : ⚙ Settings, 🌐 Export web quiz, 📋 Copy URL, ⬇️ Download HTML, ainsi que le réglage « Base URL for web export »
 - Toujours relire et valider les questions avant diffusion aux élèves
 
 ---

@@ -155,7 +155,7 @@ select { cursor: pointer; }
 .stat-pill { padding: 4px 10px; border-radius: 99px; font-size: 11.5px; font-weight: 600; background: var(--panel); color: var(--text); }
 .stat-pill.ok { color: var(--accent); }
 .stat-pill.warn { color: var(--warn); }
-.warn-list { margin-bottom: 12px; padding: 10px 13px; border-radius: 9px; background: var(--panel); border-left: 3px solid var(--warn); font-size: 12px; color: var(--text-muted); line-height: 1.6; display: none; }
+.warn-list { margin-bottom: 12px; padding: 10px 13px; border-radius: 9px; background: var(--panel); border-left: 3px solid var(--warn); font-size: 12px; color: var(--text-muted); line-height: 1.6; }
 .warn-list ul { margin-left: 16px; margin-top: 4px; }
 
 /* ── Tip ── */
@@ -908,6 +908,8 @@ function convertToXML() {
   if (nVf) { const p = document.createElement('div'); p.className = 'stat-pill'; p.textContent = `${nVf} Vrai/Faux`; statsEl.appendChild(p); }
   const nErr = questions.filter(q => q.status === 'error').length;
   if (nErr) { const p = document.createElement('div'); p.className = 'stat-pill warn'; p.textContent = `${nErr} bloc${nErr !== 1 ? 's' : ''} en erreur`; statsEl.appendChild(p); }
+  const nVerif = questions.filter(q => q.status === 'fallback').length;
+  if (nVerif) { const p = document.createElement('div'); p.className = 'stat-pill warn'; p.textContent = `\u26a0\ufe0f ${nVerif} \u00e0 v\u00e9rifier`; statsEl.appendChild(p); }
 
   // Bandeau de repli inline
   renderRepliBanner(questions);
@@ -943,7 +945,7 @@ function renderRepliBanner(questions) {
     html += `</select></div>`;
   });
   html += '</div>';
-  el.style.display = '';
+  el.style.display = 'block';
   el.innerHTML = html;
 }
 
