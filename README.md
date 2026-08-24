@@ -1,8 +1,8 @@
 # ⚡ QuizLoom
 
-**Générateur de QCM pour Pronote — à partir de tes séances Lesson Loom**
+**Générateur de QCM pour Pronote et de quiz web — à partir de tes séances Lesson Loom**
 
-Outil standalone pour enseignants d'anglais LV1 (collège / lycée). QuizLoom transforme le contenu d'une séance en prompt Claude.ai, puis convertit la réponse en fichier XML importable dans Pronote — sans serveur, sans installation, sans clé API.
+Outil standalone pour enseignants d'anglais LV1 (collège / lycée). QuizLoom transforme le contenu d'une séance en prompt Claude.ai, puis convertit la réponse en **fichier XML importable dans Pronote** ou en **quiz web interactif** à intégrer sur un site — sans serveur, sans installation, sans clé API.
 
 ---
 
@@ -14,14 +14,22 @@ Outil standalone pour enseignants d'anglais LV1 (collège / lycée). QuizLoom tr
 
 Aucune installation. Double-clic sur `quizloom.html` pour ouvrir.
 
+> ### Où va le contenu
+>
+> QuizLoom ne communique avec aucun service : il fabrique un texte, vous le copiez, et **c'est vous qui décidez où le coller**. Le contenu de votre séance part donc chez l'assistant conversationnel que vous choisissez — vous voyez exactement ce que vous envoyez.
+>
+> Les consignes de format sont du texte ordinaire : elles fonctionnent avec Claude, mais aussi avec un autre assistant. Le bouton mène à Claude.ai parce que c'est celui que j'utilise ; rien ne vous y oblige.
+
 ---
 
-## Workflow en 3 étapes
+## Workflow
 
 ```
 QuizLoom          →   Claude.ai            →   QuizLoom          →   Pronote
 Génère le prompt      Colle · Envoie           Colle la réponse      Importe le .xml
-                      Copie la réponse          Télécharge le XML
+                      Copie la réponse                ↓
+                                                  ou quiz web
+                                                  fichier HTML autonome
 ```
 
 ### Étape 1 — Configurer et générer le prompt
@@ -31,13 +39,16 @@ Génère le prompt      Colle · Envoie           Colle la réponse      Importe
 - **Coller du texte** : dans Lesson Loom, ouvre une séance → menu Exporter → ⚡ Copier pour QuizLoom → un sélecteur permet de choisir 1, 2 ou plusieurs séances → colle ici
 - **Importer un RTF** : importe directement le fichier `.rtf` exporté par Lesson Loom
 
+Les deux modes donnent le même résultat.
+
 **Configurer le QCM** :
 
-| Option | Valeurs disponibles |
+| Réglage | Valeurs disponibles |
 |--------|-------------------|
 | Nombre de questions | 3, 4, 5, 6, 8, 10, 12, 15, 20, 25, 30 |
 | Niveau CECRL | A1, A1+, A2, A2+, B1, B1+, B2, B2+, C1, C1+ |
-| Type | Mixte, Compréhension littérale, Inférence, Vocabulaire, Lexique en contexte, Grammaire, Connecteurs logiques, Civilisation / culture, Vrai / Faux justifié |
+| **Formats de question** *(cases à cocher)* | QCM, Vrai / Faux — coche les deux pour les mélanger |
+| **Angle de contenu** *(optionnel)* | **Compréhension** : littérale, inférence · **Langue** : vocabulaire, grammaire, connecteurs logiques · **Autre** : civilisation / culture · ou *Tout — mélange équilibré* |
 
 Clique sur **⚡ Générer le prompt** → copie le prompt → ouvre [claude.ai](https://claude.ai) → colle et envoie.
 
@@ -45,9 +56,9 @@ Clique sur **⚡ Générer le prompt** → copie le prompt → ouvre [claude.ai]
 
 ### Étape 2 — Convertir en XML Pronote
 
-Une fois Claude.ai a répondu, copie sa réponse et colle-la dans la zone de l'étape 2.
+Une fois que Claude.ai a répondu, copie sa réponse et colle-la dans la zone de l'étape 2.
 
-**Format attendu** — Claude génère automatiquement le bon format (les consignes sont incluses dans le prompt) :
+**Format attendu** — les consignes sont déjà incluses dans le prompt, la réponse arrive donc au bon format :
 
 ```
 What is the capital of the UK?
@@ -65,6 +76,8 @@ Oscar Wilde
 
 Chaque bonne réponse commence par `V=`. Les blocs sont séparés par une ligne vide.
 
+QuizLoom compte les questions en direct et vérifie le format. **Si un bloc est mal repéré, un bandeau apparaît** et un menu permet de corriger son format sur place, sans repasser par Claude.
+
 **Remplis les métadonnées** :
 - Nom du QCM (ex : `Séance 3 — Maleficent`)
 - Classe / Niveau (ex : `2NDE 3`)
@@ -74,7 +87,21 @@ Coche **Mélanger l'ordre des réponses** (recommandé) → clique **🧩 Géné
 
 ---
 
-### Étape 3 — Import dans Pronote
+### Étape 3 — Exporter un quiz web interactif
+
+La même réponse peut aussi devenir un **quiz jouable dans le navigateur** : un fichier HTML autonome, à mettre en ligne ou à intégrer en iframe sur n'importe quel site.
+
+1. Donne un titre au quiz — c'est celui que verront les élèves
+2. Clique **🌐 Export web quiz**
+3. **⬇️ Download HTML** pour récupérer le fichier
+
+**Réglage à faire une seule fois** (bouton ⚙ en haut) : indique l'adresse de base de ton site, par exemple `https://mon-site.fr/quiz/`. QuizLoom construit alors l'adresse complète de chaque quiz exporté, que tu peux copier d'un clic (**📋 Copy URL**) pour la donner à tes élèves.
+
+Le fichier obtenu ne dépend d'aucun serveur : il se joue tel quel.
+
+---
+
+### Étape 4 — Import dans Pronote
 
 Dans Pronote : **Outils pédagogiques → QCM → Importer des QCM → depuis des fichiers XML**
 
@@ -84,12 +111,13 @@ Sélectionne le fichier `.xml` téléchargé. Relis toujours le QCM avant de le 
 
 ## Fonctionnalités
 
-- **Détection automatique** du format V= — avertissements si une question est mal formée
+- **Deux sorties** à partir d'une seule réponse : XML Pronote et quiz web interactif
+- **Détection automatique** du format `V=` — un bandeau signale les blocs mal formés, avec correction sur place
 - **Comptage en direct** des questions pendant la saisie
 - **Mélange des réponses** pour éviter les patterns (optionnel)
 - **Bouton Effacer** sur chaque zone de saisie
-- **✦ Nouveau QCM** — remet tout à zéro en un clic après génération
-- **Guide & Démo** — tour interactif en 9 étapes + séance démo Fairy Tales (2NDE B1+)
+- **Guide & Démo** — tour interactif en 10 étapes + séance démo Fairy Tales (2NDE B1+)
+- **Copier ces consignes seules** — pour réutiliser le format sans le contenu de la séance
 - **RTF stripping** — le fichier RTF Lesson Loom est nettoyé automatiquement avant envoi
 - **Dark mode** automatique (suit les préférences système)
 
@@ -111,6 +139,7 @@ Dans Lesson Loom, le menu **Exporter → ⚡ Copier pour QuizLoom** ouvre un sé
 
 - Le contenu de la séance est tronqué à 3 000 caractères dans le prompt (suffisant pour une séance complète)
 - La qualité du QCM dépend du contenu fourni — plus la séance est détaillée, meilleures sont les questions
+- Quelques libellés de l'étape 3 sont encore en anglais
 - Toujours relire et valider les questions avant diffusion aux élèves
 
 ---
