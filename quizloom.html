@@ -524,7 +524,8 @@ const FORMAT_DEFS = {
     tag: 'QCM',
     label: 'QCM',
     instr: `[QCM] — une ou plusieurs bonnes réponses
-- La question tient sur UNE seule ligne (mets toute consigne dans C=).
+- La ligne juste APRÈS C= est la question elle-même, sur UNE seule ligne, sans préfixe.
+- C= ne contient jamais la question : c'est une consigne générique, réutilisable telle quelle.
 - La ou les bonnes réponses commencent par V=. Les autres propositions sans préfixe.
 - 3 ou 4 propositions. Une seule V= = réponse unique ; plusieurs V= = réponses multiples.
 
@@ -541,7 +542,8 @@ E=The document states that London is the capital of the United Kingdom.`
     tag: 'VF',
     label: 'Vrai / Faux',
     instr: `[VF] — vrai ou faux
-- L'affirmation, puis UNE seule ligne V=True ou V=False. Aucune autre proposition.
+- La ligne juste APRÈS C= est l'affirmation elle-même, sans préfixe, puis UNE seule ligne V=True ou V=False. Aucune autre proposition.
+- C= ne contient jamais l'affirmation : c'est une consigne générique (ex : C=True or false?).
 - Mets la justification dans E=, jamais dans l'affirmation (sinon la réponse est dévoilée).
 
 Exemple :
@@ -559,6 +561,7 @@ const FORMAT_HEADER = `FORMAT DE SORTIE — à respecter exactement :
 - Chaque bloc COMMENCE par un tag sur sa propre ligne : ${Object.values(FORMAT_DEFS).map(f => '[' + f.tag + ']').join(' ou ')}.
 - Chaque bloc DOIT inclure ces deux lignes, juste après le tag :
   - C= consigne courte et générique adressée à l'élève (ex : C=Choose the correct answer. / C=True or false?).
+    Jamais la question : la question vient sur la ligne suivante, sans préfixe.
   - E= explication de la bonne réponse en une phrase, en t'appuyant sur le document.
 - Ne les omets jamais : les deux lignes sont attendues sur TOUS les blocs, quel que soit le format.
 - Pas de numérotation, pas de gras, pas de puces.`;
@@ -782,8 +785,13 @@ function extractCE(lines) {
 }
 
 // ── Parsers par format ──
+// Préfixes réservés : C= consigne, V= bonne réponse, E= explication.
+const LIGNE_PREFIXEE = /^\s*[cve]\s*=/i;
+
 function parseQcmBody(restLines) {
   if (restLines.length < 2) return { ok: false, issue: 'QCM : question ou réponses manquantes.' };
+  // Un énoncé ne peut pas être une ligne préfixée : elle appartient à un autre rôle.
+  if (LIGNE_PREFIXEE.test(restLines[0])) return { ok: false, issue: "QCM : énoncé manquant — la ligne après C= doit être la question, sans préfixe." };
   const qText = stripQuestionPrefix(restLines[0]).trim();
   const answers = restLines.slice(1).map(parseAnswerLine).filter(a => a.text.length > 0);
   if (answers.length < 2) return { ok: false, issue: 'QCM : moins de 2 réponses détectées.' };
@@ -803,7 +811,9 @@ function parseVfBody(restLines) {
     }
   });
   if (vIdx === -1) return { ok: false, issue: 'Vrai/Faux attend une ligne V=True ou V=False.' };
-  const statement = restLines.filter((_, i) => i !== vIdx).map((l, idx) => idx === 0 ? stripQuestionPrefix(l) : l).join(' ').trim();
+  const reste = restLines.filter((_, i) => i !== vIdx);
+  if (reste.length && LIGNE_PREFIXEE.test(reste[0])) return { ok: false, issue: "Vrai/Faux : affirmation manquante — la ligne après C= doit être l'affirmation, sans préfixe." };
+  const statement = reste.map((l, idx) => idx === 0 ? stripQuestionPrefix(l) : l).join(' ').trim();
   if (!statement) return { ok: false, issue: 'Vrai/Faux : affirmation vide.' };
   return { ok: true, text: statement, answers: [{ text: 'True', correct: vVal === true }, { text: 'False', correct: vVal === false }], single: true };
 }
