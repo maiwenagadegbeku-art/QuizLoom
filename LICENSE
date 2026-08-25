@@ -1,4 +1,31 @@
-                    GNU AFFERO GENERAL PUBLIC LICENSE
+QuizLoom — Lesson Loom Suite
+Copyright (C) 2026 Maïwena Gadegbeku — lessonloom.fr
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+ADDITIONAL TERM under section 7(b) of the GNU AGPLv3
+
+Any modified version of this Software that is publicly distributed or
+deployed must include a visible credit to the original author in the user
+interface or in the documentation, in the following form or equivalent:
+
+    "Based on QuizLoom by Maïwena Gadegbeku"
+
+This credit may not be removed or hidden from end users.
+
+
+                 GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
