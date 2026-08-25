@@ -85,9 +85,18 @@ Un format plus simple, sans tag ni `C=` ni `E=`, reste accepté : QuizLoom trait
 bloc comme un QCM. Mais l'explication `E=` alimente le quiz web, et sans elle les élèves
 n'ont aucun retour après leur réponse.
 
+`C=` est une consigne générique — *Choose the correct answer.* — jamais la
+question. **La question vient sur la ligne suivante, sans préfixe.**
+
 QuizLoom compte les questions en direct et vérifie le format. **Si un bloc est mal repéré, un encadré orange apparaît** — pendant la saisie, puis de nouveau après la génération — nommant chaque bloc en cause, avec un menu qui permet de corriger son format sur place, sans repasser par Claude.
 
 > ⚠️ **Un bloc sans `V=`.** Si l'assistant oublie de marquer la bonne réponse, QuizLoom **retient la première proposition** pour ne pas perdre la question, et le signale en orange. Cette réponse par défaut a toutes les chances d'être fausse : vérifiez-la avant d'importer dans Pronote.
+>
+> ⚠️ **Un énoncé manquant.** La ligne qui suit `C=` doit être la question
+> elle-même, sans préfixe. Si l'assistant enchaîne directement sur `V=`, la
+> question n'a plus d'énoncé : QuizLoom écarte le bloc et le signale en orange,
+> plutôt que de fabriquer une question dont la bonne réponse serait fausse.
+> Remettez la question sur sa propre ligne et régénérez.
 
 **Remplis les métadonnées** :
 - Nom du QCM (ex : `Séance 3 — Vocab`)
