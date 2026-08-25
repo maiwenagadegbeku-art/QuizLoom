@@ -163,6 +163,12 @@ Dans Lesson Loom, le menu **Exporter → ⚡ Copier pour QuizLoom** ouvre un sé
 
 Vous êtes libre d'utiliser, d'étudier, de modifier et de redistribuer cet outil. En contrepartie, toute version modifiée qui est redistribuée **ou mise à disposition sur un serveur** doit être publiée sous cette même licence, code source compris.
 
+**Crédit obligatoire.** Le fichier [LICENSE](LICENSE) porte une condition
+supplémentaire, au titre de l'article 7(b) de l'AGPLv3 : toute version modifiée
+diffusée publiquement ou mise à disposition sur un serveur doit créditer
+visiblement l'autrice originale, dans son interface ou dans sa documentation. Ce
+crédit ne peut être ni retiré, ni dissimulé aux utilisateurs.
+
 Voir le fichier [LICENSE](LICENSE) pour le texte complet, et <https://www.gnu.org/licenses/agpl-3.0.html> pour la licence officielle.
 
 🪄 **QuizLoom** — Développé pour les enseignants d'anglais LV1 dans le secondaire français.
