@@ -41,6 +41,8 @@ Génère le prompt      Colle · Envoie           Colle la réponse      Importe
 
 Les deux modes donnent le même résultat.
 
+Un compteur sous le texte indique le nombre de caractères. La séance est prise en compte jusqu'à 15 000 caractères ; au-delà, un avertissement prévient que la fin ne sera pas utilisée.
+
 **Configurer le QCM** :
 
 | Réglage | Valeurs disponibles |
@@ -136,6 +138,7 @@ Sélectionne le fichier `.xml` téléchargé. Relis toujours le QCM avant de le 
 - **Deux sorties** à partir d'une seule réponse : XML Pronote et quiz web interactif
 - **Détection automatique** du format `V=` — un bandeau signale les blocs mal formés, avec correction sur place
 - **Comptage en direct** des questions pendant la saisie
+- **Compteur de caractères** de la séance, avec un avertissement au-delà de 15 000
 - **Mélange des réponses** pour éviter les patterns (optionnel)
 - **Bouton Effacer** sur chaque zone de saisie
 - **Guide & Démo** — tour interactif en 10 étapes + séance démo Fairy Tales (2NDE B1+)
@@ -159,7 +162,7 @@ Dans Lesson Loom, le menu **Exporter → ⚡ Copier pour QuizLoom** ouvre un sé
 
 ## Limites
 
-- Le contenu de la séance est tronqué à 3 000 caractères dans le prompt (suffisant pour une séance complète)
+- Le contenu de la séance est pris en compte jusqu'à 15 000 caractères (une séance complète, documents compris) ; au-delà, un avertissement s'affiche et la fin n'est pas envoyée
 - La qualité du QCM dépend du contenu fourni — plus la séance est détaillée, meilleures sont les questions
 - Les libellés de l'étape 3 sont en anglais : ⚙ Settings, 🌐 Export web quiz, 📋 Copy URL, ⬇️ Download HTML, ainsi que le réglage « Base URL for web export »
 - Toujours relire et valider les questions avant diffusion aux élèves

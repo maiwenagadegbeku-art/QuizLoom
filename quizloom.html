@@ -158,6 +158,10 @@ select { cursor: pointer; }
 .warn-list { margin-bottom: 12px; padding: 10px 13px; border-radius: 9px; background: var(--panel); border-left: 3px solid var(--warn); font-size: 12px; color: var(--text-muted); line-height: 1.6; }
 .warn-list ul { margin-left: 16px; margin-top: 4px; }
 
+/* ── QL1 : longueur de la seance ── */
+.ql1-cpt { margin-top: 6px; font-size: 11px; color: var(--text-muted); text-align: right; min-height: 14px; }
+.ql1-warn { margin-top: 8px; padding: 9px 12px; border-radius: 9px; background: var(--panel); border-left: 3px solid var(--warn); font-size: 12px; color: var(--text); line-height: 1.5; display: none; }
+
 /* ── Tip ── */
 .tip { margin-top: 12px; padding: 10px 13px; border-radius: 9px; background: var(--panel); border-left: 3px solid var(--accent2); font-size: 12px; color: var(--text-muted); line-height: 1.5; }
 
@@ -321,6 +325,8 @@ select { cursor: pointer; }
     </div>
     <div class="preview" id="preview1"></div>
   </div>
+  <div class="ql1-cpt" id="ql1Cpt"></div>
+  <div class="ql1-warn" id="ql1Warn"></div>
 
   <div class="grid2cfg">
     <div class="field">
@@ -576,9 +582,20 @@ function switchTab1(mode) {
   updateBtn1();
 }
 
+// QL1 : longueur de seance utilisee pour les questions (au-dela, la fin n est pas envoyee)
+const QL1_LIMITE = 15000;
 function updateBtn1() {
   const txt = mode1 === 'text' ? document.getElementById('pasteArea1').value.trim() : extractedText1;
   document.getElementById('genBtn1').disabled = !txt;
+  const n = txt.length, fr = x => x.toLocaleString('fr-FR');
+  const cpt = document.getElementById('ql1Cpt'), warn = document.getElementById('ql1Warn');
+  if (cpt) cpt.textContent = n ? fr(n) + ' caractères' : '';
+  if (warn) {
+    if (n > QL1_LIMITE) {
+      warn.textContent = `⚠️ Ta séance fait ${fr(n)} caractères : seuls les ${fr(QL1_LIMITE)} premiers seront utilisés pour les questions. Raccourcis-la, ou ne garde que la partie utile.`;
+      warn.style.display = 'block';
+    } else warn.style.display = 'none';
+  }
 }
 
 function clearText1() { document.getElementById('pasteArea1').value = ''; updateBtn1(); }
@@ -651,7 +668,7 @@ function buildPrompt() {
   const niveau = document.getElementById('niveau1').value;
   const angle = document.getElementById('contentAngle').value;
   const angleLabel = CONTENT_LABELS[angle] || '';
-  const content = rawText.slice(0, 3000);
+  const content = rawText.slice(0, QL1_LIMITE); // QL1 : 3 000 -> 15 000 caracteres
 
   // Clause formats
   let formatsClause;
